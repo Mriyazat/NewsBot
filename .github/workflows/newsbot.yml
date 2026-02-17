@@ -28,4 +28,4 @@ jobs:
       - name: Run NewsBot
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        run: python -m src.main --max-age 14
+        run: python -m src.main --max-age 48
