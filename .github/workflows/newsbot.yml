@@ -1,10 +1,10 @@
 name: NewsBot - Defence & Sovereignty News Digest
 
 on:
-  # Run every 12 hours (7 AM and 7 PM EST)
+  # Run every 12 hours: 9 AM and 9 PM EST
   schedule:
-    - cron: '0 12 * * *'   # 12:00 UTC = 7:00 AM EST
-    - cron: '0 0 * * *'    # 00:00 UTC = 7:00 PM EST
+    - cron: '0 14 * * *'   # 14:00 UTC = 9:00 AM EST
+    - cron: '0 2 * * *'    # 02:00 UTC = 9:00 PM EST
 
   # Allow manual trigger from GitHub Actions tab
   workflow_dispatch:
