@@ -1,0 +1,31 @@
+name: NewsBot - Defence & Sovereignty News Digest
+
+on:
+  # Run every 12 hours (7 AM and 7 PM EST)
+  schedule:
+    - cron: '0 12 * * *'   # 12:00 UTC = 7:00 AM EST
+    - cron: '0 0 * * *'    # 00:00 UTC = 7:00 PM EST
+
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  collect-and-send:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run NewsBot
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: python -m src.main --max-age 14

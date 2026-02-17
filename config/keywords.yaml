@@ -1,0 +1,135 @@
+# ============================================================================
+# NewsBot - Keyword & Relevance Configuration
+# ============================================================================
+# The bot uses a TWO-LAYER filtering approach:
+#
+# Layer 1 - Primary Keywords: Article must contain at least one of these.
+# Layer 2 - Context Keywords: Article must ALSO contain at least one context
+#           keyword to prove it's actually about defence/sovereignty topics
+#           (not just a random mention of "supply chain" in an unrelated article).
+#
+# Scoring: title matches count 3x more than description matches.
+# An article needs a minimum relevance_score to be included.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Primary Keywords - The main topics we care about
+# An article must match at least ONE primary keyword.
+# ---------------------------------------------------------------------------
+primary_keywords:
+  # Core defence terms
+  - "defence research"
+  - "defense research"
+  - "defence innovation"
+  - "defense innovation"
+  - "defence procurement"
+  - "defence policy"
+  - "defence funding"
+  - "defence technology"
+  - "military research"
+  - "military technology"
+  - "military innovation"
+
+  # Sovereignty & Arctic
+  - "sovereignty research"
+  - "Arctic defence"
+  - "Arctic defense"
+  - "Arctic sovereignty"
+  - "Arctic security"
+  - "northern sovereignty"
+  - "continental defence"
+
+  # Specific programs & organizations
+  - "IDEaS"
+  - "DRDC"
+  - "Defence Research and Development Canada"
+  - "Innovative Solutions Canada"
+  - "NORAD"
+  - "NATO Canada"
+  - "CANSOFCOM"
+  - "Canadian Armed Forces"
+  - "Department of National Defence"
+  - "Strong Secure Engaged"
+
+  # Cross-cutting themes
+  - "dual-use technology"
+  - "dual use technology"
+  - "civilian-military"
+  - "quantum defence"
+  - "quantum military"
+  - "quantum security"
+  - "cybersecurity defence"
+  - "cyber defence"
+  - "space defence"
+  - "universities and defence"
+  - "academic defence"
+  - "defence supply chain"
+  - "clean energy defence"
+  - "clean energy military"
+
+# ---------------------------------------------------------------------------
+# Context Keywords - Prove the article is in the right domain
+# Article must match at least ONE context keyword (in addition to a primary).
+# Think tanks and government defence sources are auto-approved (they're
+# already domain-relevant).
+# ---------------------------------------------------------------------------
+context_keywords:
+  - "Canada"
+  - "Canadian"
+  - "defence"
+  - "defense"
+  - "military"
+  - "armed forces"
+  - "national security"
+  - "sovereignty"
+  - "NATO"
+  - "NORAD"
+  - "Arctic"
+  - "DND"
+  - "DRDC"
+  - "procurement"
+  - "innovation"
+  - "research"
+  - "university"
+  - "academic"
+  - "grant"
+  - "funding"
+  - "technology"
+  - "cyber"
+  - "quantum"
+  - "space"
+  - "intelligence"
+  - "surveillance"
+
+# ---------------------------------------------------------------------------
+# Sources that skip context checking (they're inherently relevant)
+# These source categories always pass the context filter.
+# ---------------------------------------------------------------------------
+trusted_categories:
+  - "government"
+  - "think_tank"
+  - "linkedin"
+
+# ---------------------------------------------------------------------------
+# Relevance scoring thresholds
+# ---------------------------------------------------------------------------
+scoring:
+  title_multiplier: 3        # Title keyword matches are worth 3x
+  description_multiplier: 1  # Description matches worth 1x
+  min_score_trusted: 1       # Min score for trusted sources (government, think tanks)
+  min_score_general: 3       # Min score for general sources (Google News, etc.)
+
+# ---------------------------------------------------------------------------
+# Negative keywords - Exclude articles containing these (false positives)
+# ---------------------------------------------------------------------------
+negative_keywords:
+  - "fantasy football"
+  - "video game"
+  - "movie review"
+  - "sports defence"
+  - "basketball defense"
+  - "hockey defence"
+  - "soccer defence"
+  - "NFL"
+  - "NBA"
+  - "NHL defence"

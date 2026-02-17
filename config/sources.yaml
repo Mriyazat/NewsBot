@@ -1,0 +1,217 @@
+# ============================================================================
+# NewsBot - RSS Feed Sources Configuration
+# ============================================================================
+# Categories: government, think_tank, google_news, linkedin_rss
+#
+# To add a new source, just append an entry under the appropriate category.
+# For Google News keyword feeds, edit the 'google_news_queries' section.
+# For LinkedIn pages via RSS.app, add the converted feed URL under linkedin_rss.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Tier 1: Direct Government RSS Feeds
+# ---------------------------------------------------------------------------
+government:
+  - name: "Canada.ca News"
+    url: "https://www.canada.ca/en/news/web-feeds.html"
+    feed_url: "https://www.canada.ca/en/news/advanced-news-search/rss.xml"
+    category: "government"
+
+  - name: "Ontario Newsroom"
+    url: "https://news.ontario.ca"
+    feed_url: "https://news.ontario.ca/newsroom/en/rss"
+    category: "government"
+
+  - name: "Public Services and Procurement Canada"
+    url: "https://www.tpsgc-pwgsc.gc.ca"
+    feed_url: "https://www.canada.ca/en/public-services-procurement/news.atom.xml"
+    category: "government"
+
+  - name: "NSERC News Releases"
+    url: "https://www.nserc-crsng.gc.ca"
+    feed_url: "https://www.nserc-crsng.gc.ca/_rss/NewsReleases-CommuniquesDePresse-XML_eng.asp"
+    category: "government"
+
+  - name: "NSERC Program News"
+    url: "https://www.nserc-crsng.gc.ca"
+    feed_url: "https://www.nserc-crsng.gc.ca/_rss/ProgramNews-NouvellesDesProgrammes-XML_eng.asp"
+    category: "government"
+
+  - name: "Global Affairs Canada"
+    url: "https://www.international.gc.ca"
+    feed_url: "https://www.canada.ca/en/global-affairs/news.atom.xml"
+    category: "government"
+
+  - name: "Canadian Space Agency"
+    url: "https://www.asc-csa.gc.ca"
+    feed_url: "http://www.asc-csa.gc.ca/rss/default_eng.xml"
+    category: "government"
+
+  - name: "National Defence / Canadian Armed Forces"
+    url: "https://www.canada.ca/en/department-national-defence.html"
+    feed_url: "https://www.canada.ca/en/department-national-defence/news.atom.xml"
+    category: "government"
+
+  - name: "Innovation for Defence Excellence and Security (IDEaS)"
+    url: "https://www.canada.ca/en/department-national-defence/programs/defence-ideas.html"
+    feed_url: "https://www.canada.ca/en/department-national-defence/programs/defence-ideas.atom.xml"
+    category: "government"
+
+  - name: "Innovation, Science and Economic Development Canada"
+    url: "https://www.ic.gc.ca"
+    feed_url: "https://www.canada.ca/en/innovation-science-economic-development/news.atom.xml"
+    category: "government"
+
+  # NRC doesn't have a public RSS feed; covered via Google News queries instead
+  # - name: "National Research Council Canada"
+  #   url: "https://nrc.canada.ca"
+  #   feed_url: "N/A"
+  #   category: "government"
+
+# ---------------------------------------------------------------------------
+# Tier 1: Think Tanks & Research Institutes
+# ---------------------------------------------------------------------------
+think_tanks:
+  # CGAI doesn't have a public RSS feed; covered via Google News queries
+  # - name: "CGAI - Canadian Global Affairs Institute"
+  #   url: "https://www.cgai.ca"
+  #   feed_url: "N/A"
+  #   category: "think_tank"
+
+  - name: "CDA Institute"
+    url: "https://cdainstitute.ca"
+    feed_url: "https://cdainstitute.ca/feed/"
+    category: "think_tank"
+
+  - name: "Macdonald-Laurier Institute"
+    url: "https://macdonaldlaurier.ca"
+    feed_url: "https://macdonaldlaurier.ca/feed/"
+    category: "think_tank"
+
+  - name: "Canadian International Council"
+    url: "https://thecic.org"
+    feed_url: "https://thecic.org/feed/"
+    category: "think_tank"
+
+  - name: "NAADSN - North American and Arctic Defence and Security Network"
+    url: "https://www.naadsn.ca"
+    feed_url: "https://www.naadsn.ca/feed/"
+    category: "think_tank"
+
+  # CDA publications feed 404s; main CDA Institute feed covers it
+  # - name: "Conference of Defence Associations"
+  #   url: "https://cdainstitute.ca"
+  #   feed_url: "https://cdainstitute.ca/category/publications/feed/"
+  #   category: "think_tank"
+
+# ---------------------------------------------------------------------------
+# Tier 1: Canadian Media (RSS feeds from major news outlets)
+# These publish high volume - keyword filter handles relevance.
+# ---------------------------------------------------------------------------
+media:
+  - name: "CBC Politics"
+    url: "https://www.cbc.ca/news/politics"
+    feed_url: "https://rss.cbc.ca/lineup/politics.xml"
+    category: "google_news"
+
+  - name: "CBC Canada"
+    url: "https://www.cbc.ca/news/canada"
+    feed_url: "https://rss.cbc.ca/lineup/canada.xml"
+    category: "google_news"
+
+  - name: "CBC Technology & Science"
+    url: "https://www.cbc.ca/news/science"
+    feed_url: "https://rss.cbc.ca/lineup/technology.xml"
+    category: "google_news"
+
+  - name: "Global News Canada"
+    url: "https://globalnews.ca"
+    feed_url: "https://globalnews.ca/feed/"
+    category: "google_news"
+
+  - name: "CTV News"
+    url: "https://www.ctvnews.ca"
+    feed_url: "https://www.ctvnews.ca/content/rss/ctvnews-ca-top-stories-public-rss-1.822009"
+    category: "google_news"
+
+  - name: "National Post"
+    url: "https://nationalpost.com"
+    feed_url: "https://nationalpost.com/feed"
+    category: "google_news"
+
+  - name: "The Globe and Mail"
+    url: "https://www.theglobeandmail.com"
+    feed_url: "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/politics/"
+    category: "google_news"
+
+# ---------------------------------------------------------------------------
+# Tier 2: Google News RSS Feeds (keyword-based)
+# These auto-generate RSS from Google News search queries.
+# Format: https://news.google.com/rss/search?q=QUERY&hl=en-CA&gl=CA&ceid=CA:en
+# ---------------------------------------------------------------------------
+google_news_queries:
+  - query: '"defence research" Canada'
+    label: "Defence Research"
+  - query: '"Arctic defence" OR "Arctic sovereignty" Canada'
+    label: "Arctic Defence & Sovereignty"
+  - query: '"defence innovation" Canada'
+    label: "Defence Innovation"
+  - query: '"quantum defence" OR "quantum military" Canada'
+    label: "Quantum Defence"
+  - query: '"dual-use technology" Canada defence'
+    label: "Dual-Use Technology"
+  - query: '"universities and defence" OR "academic defence research" Canada'
+    label: "Universities & Defence"
+  - query: '"defence procurement" Canada'
+    label: "Defence Procurement"
+  - query: '"supply chain" Canada defence'
+    label: "Supply Chains & Defence"
+  - query: '"clean energy" Canada defence military'
+    label: "Clean Energy & Defence"
+  - query: '"cybersecurity" Canada defence'
+    label: "Cybersecurity & Defence"
+  - query: 'NORAD modernization Canada'
+    label: "NORAD Modernization"
+  - query: '"defence policy" Canada 2025 OR 2026'
+    label: "Defence Policy"
+  - query: '"IDEaS" OR "Innovative Solutions Canada" defence'
+    label: "IDEaS & ISC Programs"
+  - query: '"DRDC" OR "Defence Research and Development Canada"'
+    label: "DRDC"
+  - query: '"Canadian Global Affairs Institute" OR "CGAI" defence'
+    label: "CGAI"
+  - query: '"National Research Council" Canada defence OR security'
+    label: "NRC Canada"
+  - query: 'Canada "defence industrial" OR "defence base"'
+    label: "Defence Industrial Base"
+  - query: '"Canadian Armed Forces" research OR innovation OR technology'
+    label: "CAF Research & Innovation"
+
+# ---------------------------------------------------------------------------
+# Tier 3: LinkedIn via RSS.app (optional, requires RSS.app subscription)
+# Replace placeholder URLs with actual RSS.app-generated feed URLs.
+# Instructions: Go to https://rss.app, paste the LinkedIn company page URL,
+# and it will generate an RSS feed URL for you.
+# ---------------------------------------------------------------------------
+linkedin_rss:
+  # Uncomment and replace with your RSS.app feed URLs:
+  # - name: "NRC Canada - LinkedIn"
+  #   feed_url: "https://rss.app/feeds/YOUR_FEED_ID.xml"
+  #   category: "linkedin"
+  # - name: "TIPS - LinkedIn"
+  #   feed_url: "https://rss.app/feeds/YOUR_FEED_ID.xml"
+  #   category: "linkedin"
+  # - name: "DND - LinkedIn"
+  #   feed_url: "https://rss.app/feeds/YOUR_FEED_ID.xml"
+  #   category: "linkedin"
+  # - name: "DRDC - LinkedIn"
+  #   feed_url: "https://rss.app/feeds/YOUR_FEED_ID.xml"
+  #   category: "linkedin"
+  # - name: "Innovative Solutions Canada - LinkedIn"
+  #   feed_url: "https://rss.app/feeds/YOUR_FEED_ID.xml"
+  #   category: "linkedin"
+
+# ---------------------------------------------------------------------------
+# Google News RSS base URL template
+# ---------------------------------------------------------------------------
+google_news_base_url: "https://news.google.com/rss/search?q={query}&hl=en-CA&gl=CA&ceid=CA:en"

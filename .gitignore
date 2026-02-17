@@ -1,0 +1,33 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Data (local database, not committed)
+data/seen_articles.db
+data/newsbot.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Conda
+.conda/
+
+# Virtual environments
+venv/
+env/
+.venv/
