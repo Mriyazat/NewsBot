@@ -26,9 +26,25 @@ primary_keywords:
   - "defence policy"
   - "defence funding"
   - "defence technology"
+  - "defence strategy"
+  - "defence industrial"
+  - "defence industry"
+  - "defence contracts"
+  - "defence cooperation"
+  - "defence exports"
+  - "defence spending"
+  - "defence budget"
+  - "defence investment"
+  - "defence production"
+  - "defence capability"
+  - "defence modernization"
+  - "defence partnership"
   - "military research"
   - "military technology"
   - "military innovation"
+  - "military spending"
+  - "military buildup"
+  - "military procurement"
 
   # Sovereignty & Arctic
   - "sovereignty research"
@@ -36,6 +52,7 @@ primary_keywords:
   - "Arctic defense"
   - "Arctic sovereignty"
   - "Arctic security"
+  - "Arctic military"
   - "northern sovereignty"
   - "continental defence"
 
@@ -45,11 +62,15 @@ primary_keywords:
   - "Defence Research and Development Canada"
   - "Innovative Solutions Canada"
   - "NORAD"
-  - "NATO Canada"
+  - "NATO"
   - "CANSOFCOM"
   - "Canadian Armed Forces"
   - "Department of National Defence"
+  - "National Defence"
   - "Strong Secure Engaged"
+  - "Canadian Forces"
+  - "Royal Canadian Navy"
+  - "Royal Canadian Air Force"
 
   # Cross-cutting themes
   - "dual-use technology"
@@ -68,14 +89,27 @@ primary_keywords:
   - "clean energy military"
 
 # ---------------------------------------------------------------------------
-# Context Keywords - Prove the article is in the right domain
-# Article must match at least ONE context keyword (in addition to a primary).
-# Think tanks and government defence sources are auto-approved (they're
-# already domain-relevant).
+# Canada Keywords - Article MUST mention Canada (for non-trusted sources)
+# This ensures we don't pick up European, US, or other countries' defence news.
 # ---------------------------------------------------------------------------
-context_keywords:
+canada_keywords:
   - "Canada"
   - "Canadian"
+  - "Ottawa"
+  - "DND"
+  - "DRDC"
+  - "NSERC"
+  - "NORAD"
+  - "CAF"
+  - "CANSOFCOM"
+  - "IDEaS"
+
+# ---------------------------------------------------------------------------
+# Context Keywords - Additional domain validation
+# Article must match at least ONE context keyword (in addition to a primary
+# and a Canada keyword). Think tanks and government sources are auto-approved.
+# ---------------------------------------------------------------------------
+context_keywords:
   - "defence"
   - "defense"
   - "military"
@@ -85,8 +119,6 @@ context_keywords:
   - "NATO"
   - "NORAD"
   - "Arctic"
-  - "DND"
-  - "DRDC"
   - "procurement"
   - "innovation"
   - "research"
@@ -100,6 +132,9 @@ context_keywords:
   - "space"
   - "intelligence"
   - "surveillance"
+  - "industry"
+  - "strategy"
+  - "investment"
 
 # ---------------------------------------------------------------------------
 # Sources that skip context checking (they're inherently relevant)

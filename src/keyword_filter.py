@@ -1,11 +1,11 @@
 """
 Keyword Filter - Smart contextual relevance scoring for articles.
 
-Instead of simple keyword matching, this module uses a two-layer approach:
+Uses a THREE-LAYER approach for non-trusted sources:
 
 1. Primary keyword match: Does the article mention a defence/sovereignty topic?
-2. Context validation: Is the article ACTUALLY about defence (not sports defence,
-   fantasy football, etc.)?
+2. Canada check: Is this specifically about CANADA (not EU, US, UK defence)?
+3. Context validation: Is the article ACTUALLY about defence (not sports)?
 
 Scoring:
 - Title matches are worth 3x more than description matches
@@ -32,6 +32,9 @@ class KeywordFilter:
 
         self.primary_keywords = [
             kw.lower() for kw in self.config.get("primary_keywords", [])
+        ]
+        self.canada_keywords = [
+            kw.lower() for kw in self.config.get("canada_keywords", [])
         ]
         self.context_keywords = [
             kw.lower() for kw in self.config.get("context_keywords", [])
@@ -146,9 +149,24 @@ class KeywordFilter:
         else:
             min_score = self.min_score_general
 
-        # Step 6: Context validation for non-trusted sources
+        # Step 6: Canada check + context validation for non-trusted sources
         context_matched = []
         if not is_trusted:
+            # 6a: Article MUST mention Canada specifically
+            combined_text = f"{title} {description}"
+            _, canada_matched = self._count_keyword_matches(
+                combined_text, self.canada_keywords
+            )
+            if not canada_matched:
+                return {
+                    "score": primary_score,
+                    "passed": False,
+                    "matched_primary": all_primary_matched,
+                    "matched_context": [],
+                    "reason": "Not about Canada",
+                }
+
+            # 6b: Also need domain context keywords
             _, title_context = self._count_keyword_matches(
                 title, self.context_keywords
             )
@@ -157,7 +175,6 @@ class KeywordFilter:
             )
             context_matched = list(set(title_context + desc_context))
 
-            # Non-trusted sources MUST have at least one context keyword
             if not context_matched:
                 return {
                     "score": primary_score,
@@ -168,7 +185,7 @@ class KeywordFilter:
                 }
 
             # Bonus: multiple context keywords boost the score
-            context_bonus = len(context_matched) - 1  # First one is required
+            context_bonus = len(context_matched) - 1
             primary_score += context_bonus
 
         # Step 7: Check against threshold
