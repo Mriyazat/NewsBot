@@ -222,7 +222,7 @@ Examples:
     if args.stats:
         dedup = DedupTracker()
         stats = dedup.stats()
-        print(f"\nNewsBot Database Stats:")
+        print("\nNewsBot Database Stats:")
         print(f"  Total articles tracked: {stats['total_tracked']}")
         print(f"  Sent in last 24 hours:  {stats['sent_last_24h']}")
         return

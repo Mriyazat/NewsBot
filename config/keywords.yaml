@@ -1,10 +1,13 @@
 # ============================================================================
 # NewsBot - Keyword & Relevance Configuration
 # ============================================================================
-# The bot uses a TWO-LAYER filtering approach:
+# Trusted sources (see `trusted_categories`) only need to pass Layer 1.
+# All other sources must pass all three layers:
 #
 # Layer 1 - Primary Keywords: Article must contain at least one of these.
-# Layer 2 - Context Keywords: Article must ALSO contain at least one context
+# Layer 2 - Canada Keywords:  Article must mention Canada, so we don't pick up
+#           unrelated US/EU/UK defence news.
+# Layer 3 - Context Keywords: Article must ALSO contain at least one context
 #           keyword to prove it's actually about defence/sovereignty topics
 #           (not just a random mention of "supply chain" in an unrelated article).
 #

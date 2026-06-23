@@ -9,23 +9,26 @@ Handles:
 """
 
 import logging
+import re
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from urllib.parse import quote_plus
 
 import feedparser
 import requests
+import urllib3
 import yaml
 
 logger = logging.getLogger(__name__)
 
-# Timeout for feed requests (seconds)
+# Timeout for feed requests (seconds).
 REQUEST_TIMEOUT = 15
 
-# User-Agent to avoid being blocked by some feeds
+# User-Agent string sent with every request. Some feeds reject the default
+# requests/feedparser agent, so we present a descriptive, browser-like value.
 USER_AGENT = (
     "Mozilla/5.0 (compatible; NewsBot/1.0; "
-    "+https://github.com/Mriyazat/NewsBot-)"
+    "+https://github.com/Mriyazat/NewsBot)"
 )
 
 
@@ -87,8 +90,11 @@ class FeedCollector:
             response.raise_for_status()
             return feedparser.parse(response.content)
         except requests.exceptions.SSLError:
-            # Some government sites have SSL issues; retry without verify
+            # Some government sites have misconfigured certificates; retry once
+            # with verification disabled. Suppress the resulting warning since
+            # this fallback is deliberate and scoped to a single request.
             logger.warning(f"SSL error for {feed_url}, retrying without verification")
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
             try:
                 response = requests.get(
                     feed_url,
@@ -143,8 +149,7 @@ class FeedCollector:
             elif "description" in entry:
                 description = entry["description"]
 
-            # Clean HTML tags from description (simple approach)
-            import re
+            # Strip HTML tags and collapse whitespace in the description.
             description = re.sub(r"<[^>]+>", " ", description)
             description = re.sub(r"\s+", " ", description).strip()
 
@@ -280,8 +285,7 @@ class FeedCollector:
         unique = []
 
         for article in articles:
-            # Normalize: lowercase, strip punctuation, collapse spaces
-            import re
+            # Normalize: lowercase, strip punctuation, collapse spaces.
             normalized = re.sub(r"[^\w\s]", "", article.title.lower())
             normalized = re.sub(r"\s+", " ", normalized).strip()
 

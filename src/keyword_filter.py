@@ -238,16 +238,8 @@ class KeywordFilter:
                     f"  SKIP: {article.title[:60]}... ({result['reason']})"
                 )
 
-        # Sort by relevance score (highest first), then by date
-        relevant.sort(
-            key=lambda a: (
-                -a.relevance_score,
-                a.published or datetime_min(),
-            ),
-            reverse=False,
-        )
-
-        # Re-sort: highest score first, and within same score, newest first
+        # Sort by relevance score (highest first); within an equal score,
+        # show the most recently published article first.
         relevant.sort(
             key=lambda a: (
                 -a.relevance_score,
@@ -261,9 +253,3 @@ class KeywordFilter:
         )
 
         return relevant
-
-
-def datetime_min():
-    """Return a minimal datetime for sorting fallback."""
-    from datetime import datetime, timezone
-    return datetime(2000, 1, 1, tzinfo=timezone.utc)
